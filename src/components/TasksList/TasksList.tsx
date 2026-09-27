@@ -1,5 +1,5 @@
 import { tasks } from '../../data/seed'
-import TaskCard from "../TaskCard/TaskCard"
+import Column from '../Column/Column'
 
 const TasksList = () => {
     const openTasks = tasks.filter((task) => task.status === 'backlog')
@@ -9,13 +9,13 @@ const TasksList = () => {
     return (
         <div className='flex'>
             <div id="open_tasks" className="">
-                {openTasks.map((task) => <TaskCard key={task.id} task={task}/>)}
+                <Column tasks={openTasks} columnName='Открытые'/>
             </div>
             <div id="progress_tasks" className="">
-                {progressTasks.map((task) => <TaskCard key={task.id} task={task}/>)}
+                <Column tasks={progressTasks} columnName='В работе'/>
             </div>
             <div id="completed_tasks" className="">
-                {doneTasks.map((task) => <TaskCard key={task.id} task={task}/>)}
+                <Column tasks={doneTasks} columnName='Выполненные'/>
             </div>
         </div>
     )
