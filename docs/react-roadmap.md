@@ -26,8 +26,8 @@
 
 Состояние и события. Здесь ломается большинство джунов.
 
-- [ ] **Responding to Events** — передаём функцию, а не вызываем её (`onClick={handle}`, не `onClick={handle()}`); именование `handleX` внутри / проп `onX` снаружи; всплытие, `e.stopPropagation()`, `e.preventDefault()`, фаза capture.
-- [ ] **State: A Component's Memory** — `useState`, почему обычная переменная не работает, state локален и изолирован для каждого экземпляра компонента.
+- [х] **Responding to Events** — передаём функцию, а не вызываем её (`onClick={handle}`, не `onClick={handle()}`); именование `handleX` внутри / проп `onX` снаружи; всплытие, `e.stopPropagation()`, `e.preventDefault()`, фаза capture.
+- [х] **State: A Component's Memory** — `useState`, почему обычная переменная не работает, state локален и изолирован для каждого экземпляра компонента.
 - [ ] **Render and Commit** — три шага: триггер → рендер → коммит в DOM. Понимать, что React не «перерисовывает всю страницу».
 - [ ] **State as a Snapshot** — значение state заморожено внутри одного рендера; классика с тремя `setCount(count + 1)` подряд.
 - [ ] **Queueing a Series of State Updates** — батчинг, updater-функция `setCount(c => c + 1)`, когда она обязательна.
