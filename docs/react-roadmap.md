@@ -28,8 +28,8 @@
 
 - [х] **Responding to Events** — передаём функцию, а не вызываем её (`onClick={handle}`, не `onClick={handle()}`); именование `handleX` внутри / проп `onX` снаружи; всплытие, `e.stopPropagation()`, `e.preventDefault()`, фаза capture.
 - [х] **State: A Component's Memory** — `useState`, почему обычная переменная не работает, state локален и изолирован для каждого экземпляра компонента.
-- [ ] **Render and Commit** — три шага: триггер → рендер → коммит в DOM. Понимать, что React не «перерисовывает всю страницу».
-- [ ] **State as a Snapshot** — значение state заморожено внутри одного рендера; классика с тремя `setCount(count + 1)` подряд.
+- [x] **Render and Commit** — три шага: триггер → рендер → коммит в DOM. Понимать, что React не «перерисовывает всю страницу».
+- [x] **State as a Snapshot** — значение state заморожено внутри одного рендера; классика с тремя `setCount(count + 1)` подряд.
 - [ ] **Queueing a Series of State Updates** — батчинг, updater-функция `setCount(c => c + 1)`, когда она обязательна.
 - [ ] **Updating Objects in State** — иммутабельность, spread, обновление вложенных объектов, почему мутация «иногда работает» и это хуже, чем если бы она не работала вовсе.
 - [ ] **Updating Arrays in State** — добавить / удалить / заменить / отсортировать без мутации: `map`, `filter`, `slice`, `toSorted`, `toReversed`; запрещённые `push`, `splice`, `sort` по месту.
