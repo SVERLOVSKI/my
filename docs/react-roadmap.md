@@ -1,7 +1,10 @@
 # Карта React: что нужно закрыть руками
 
 Структура повторяет раздел **Learn** на [react.dev](https://react.dev/learn) (версия доки под React 19).
-Каждый пункт — одна тема, которую нужно не прочитать, а написать пальцами в проекте [Reps](./project-reps.md).
+Каждый пункт — одна тема, которую нужно не прочитать, а написать пальцами в проекте [Reps](./project-reps.md)
+или в отдельном упражнении. Основной проект использует `useState`, Context и `localStorage`;
+`useReducer` и его сочетание с Context отрабатываются в
+[упражнении с формой попытки](./project-reps.md#отдельное-упражнение-reducer).
 
 Формат работы: читаешь страницу доки → сразу пишешь кусок фичи, где эта тема нужна → отмечаешь `[x]`.
 Если тему невозможно применить на текущем этапе проекта — это нормально, она всплывёт позже.
@@ -42,9 +45,9 @@
 - [ ] **Choosing the State Structure** — группировать связанное; избегать противоречивых, избыточных и дублирующихся state; **не хранить в state то, что можно вычислить при рендере**; избегать глубокой вложенности (нормализация).
 - [ ] **Sharing State Between Components** — подъём состояния (lifting state up), controlled vs uncontrolled компоненты, single source of truth.
 - [ ] **Preserving and Resetting State** — state живёт в **позиции** компонента в дереве; сброс через `key`; почему тот же компонент на той же позиции сохраняет state.
-- [ ] **Extracting State Logic into a Reducer** — `useReducer`, экшены описывают «что произошло», а не «что поменять»; когда reducer читаемее набора `useState`.
-- [ ] **Passing Data Deeply with Context** — `createContext` / `useContext` / `<Context>` как провайдер (React 19); **сначала попробовать композицию и `children`**, контекст — не замена пропсам.
-- [ ] **Scaling Up with Reducer and Context** — reducer + context = локальный стор без внешних библиотек; разделение контекста состояния и контекста действий.
+- [ ] **Extracting State Logic into a Reducer** — отдельное упражнение с формой попытки: `useReducer`, экшены описывают «что произошло», а не «что поменять»; сравнить с версией на `useState`.
+- [ ] **Passing Data Deeply with Context** — в основном проекте `BoardProvider` хранит данные в `useState`, Context раздаёт данные и обработчики; `createContext` / `useContext` / `<Context>` как провайдер (React 19); **сначала попробовать композицию и `children`**.
+- [ ] **Scaling Up with Reducer and Context** — в отдельном упражнении передать состояние формы и `dispatch` через разные контексты; основная доска продолжает работать на `useState` и Context.
 
 ## Часть 4. Escape Hatches — выход за пределы React
 
@@ -65,8 +68,8 @@
 
 **Состояние**
 
-- [ ] `useState` — базовое состояние
-- [ ] `useReducer` — сложные переходы состояний
+- [ ] `useState` — основное состояние проекта, включая задачи в `BoardProvider`
+- [ ] `useReducer` — переходы состояний в отдельном упражнении с формой попытки
 - [ ] `useContext` — чтение контекста
 - [ ] `useRef` — значение без рендера / DOM-узел
 
@@ -108,7 +111,7 @@
 - [ ] `useState<Task[]>([])` — когда нужен явный дженерик, а когда хватает вывода типа
 - [ ] `ReactNode` для `children`, `ComponentProps<'button'>` для обёрток над DOM-элементами
 - [ ] Типы событий: `React.ChangeEvent<HTMLInputElement>`, `React.FormEvent<HTMLFormElement>`
-- [ ] Дискриминированные юнионы для экшенов редьюсера и для состояний загрузки
+- [ ] Дискриминированные юнионы для экшенов редьюсера (в отдельном упражнении) и для состояний загрузки
 - [ ] `useRef<HTMLInputElement>(null)` и корректная работа с `null`
 
 ---
