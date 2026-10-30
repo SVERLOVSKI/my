@@ -9,7 +9,7 @@ const TaskCard = ({task}: TaskCardProps) => {
 
     return (
         <div className="border m-1 p-2 h-44 w-80">
-        <h3 className="pb-2 font-bold text-lg">Задача: {task.title}</h3>
+        <h3 title={task.title} className="pb-2 font-bold text-lg truncate">Задача: {task.title}</h3>
         <p>Тема: {task.topic}</p>
         <div className="pb-2 flex items-center gap-2">Сложность: <DifficultBadge difficult={task.difficulty}/></div>
         <p>Стаус: {task.status}</p>

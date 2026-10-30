@@ -1,6 +1,6 @@
 const Header = () => {
     return (
-        <div>
+        <div className="flex gap-3">
             <h1>Шапка сайта</h1>
         </div>
     )
