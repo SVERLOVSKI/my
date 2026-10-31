@@ -21,7 +21,7 @@ export type Task = {
   createdAt: string
 }
 
-export const tasks: Task[] = [
+export const taskItems: Task[] = [
   {
     id: 'two-sum',
     title: 'Two Sum',

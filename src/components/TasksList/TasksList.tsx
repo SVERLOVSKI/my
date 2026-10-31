@@ -1,10 +1,12 @@
 import { useState } from 'react'
 
-import { tasks } from '../../data/seed'
+import { taskItems } from '../../data/seed'
 import Column from '../Column/Column'
 import FilterBlock from '../Filters/FiltersBlock'
+import AddTaskForm from '../AddTaskForm/AddTaskForm'
 
 const TasksList = () => {
+    const [tasks, setTasks] = useState(taskItems)
     const [showOnlyIncomplete, setShowOnlyIncomplete] = useState(false)
     const [theme, setTheme] = useState('all')
 
@@ -16,25 +18,30 @@ const TasksList = () => {
 
     return (
         <>
-        <div>
-            <FilterBlock 
-            showOnlyIncomplete={showOnlyIncomplete}
-            setShowOnlyIncomplete={setShowOnlyIncomplete} 
-            themes={themes}
-            theme={theme}
-            setTheme={setTheme}/>
-        </div>
-        <div className='flex'>
-            <div id="open_tasks" className="">
-                <Column tasks={openTasks} columnName='Открытые' theme={theme}/>
+            <div>
+                <FilterBlock 
+                showOnlyIncomplete={showOnlyIncomplete}
+                setShowOnlyIncomplete={setShowOnlyIncomplete} 
+                themes={themes}
+                theme={theme}
+                setTheme={setTheme}/>
             </div>
-            <div id="progress_tasks" className="">
-                <Column tasks={progressTasks} columnName='В работе' theme={theme}/>
+            <div className='flex'>
+                <div className='flex'>
+                    <div id="open_tasks" className="">
+                        <Column tasks={openTasks} columnName='Открытые' theme={theme}/>
+                    </div>
+                    <div id="progress_tasks" className="">
+                        <Column tasks={progressTasks} columnName='В работе' theme={theme}/>
+                    </div>
+                    <div id="completed_tasks">
+                        <Column tasks={doneTasks} showOnlyIncomplete={showOnlyIncomplete} columnName='Выполненные' theme={theme}/>
+                    </div>
+                </div>
+                <div>
+                    <AddTaskForm tasks={tasks} setTasks={setTasks}/>
+                </div>
             </div>
-            <div id="completed_tasks" className="flex items-center">
-                <Column tasks={doneTasks} showOnlyIncomplete={showOnlyIncomplete} columnName='Выполненные' theme={theme}/>
-            </div>
-        </div>
         </>
     )
 }
