@@ -50,7 +50,7 @@ export const useTasks = () => {
         setTasks(prevTasks =>
             prevTasks.map(task => 
                 task.id === taskId
-                    ? {...task, attempts: {...task.attempts, newAttempt}}
+                    ? {...task, attempts: [...task.attempts, newAttempt]}
                     : task
             )
         )
