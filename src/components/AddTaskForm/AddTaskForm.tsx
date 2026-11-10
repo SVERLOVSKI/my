@@ -6,7 +6,7 @@ type AddTaskFormProps = {
     setTasks: (value:Task[]) => void
 }
 
-type SelectChangeEvent<T extends string> = ChangeEvent<HTMLSelectElement & {value: T}>
+export type SelectChangeEvent<T extends string> = ChangeEvent<HTMLSelectElement & {value: T}>
 
 const AddTaskForm = ({tasks, setTasks}: AddTaskFormProps) => {
     const [title, setTitle] = useState('')

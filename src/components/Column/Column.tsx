@@ -1,4 +1,4 @@
-import type { Task } from "../../data/seed";
+import type { Status, Task } from "../../data/seed";
 import TaskCard from "../TaskCard/TaskCard";
 
 interface ColumnProps {
@@ -6,9 +6,22 @@ interface ColumnProps {
     columnName: string
     showOnlyIncomplete?: boolean
     theme: string
+    onStatusChange: (taskId: string, newStatus: Status) => void
+    onTitleChange: (taskId: string, newTitle: string) => void
+    onDeleteTask: (taskId: string) => void
+    onAddAttempt: (taskId: string) => void
 }
 
-const Column = ({tasks, columnName, showOnlyIncomplete, theme}: ColumnProps) => {
+const Column = ({
+    tasks,
+    columnName,
+    showOnlyIncomplete,
+    theme,
+    onStatusChange,
+    onTitleChange,
+    onDeleteTask,
+    onAddAttempt}: ColumnProps) => {
+    
     if (tasks.length === 0 || showOnlyIncomplete) {
         return (
             <div className="max-w-40">
@@ -23,7 +36,13 @@ const Column = ({tasks, columnName, showOnlyIncomplete, theme}: ColumnProps) => 
         <div>
             <h3>{columnName}</h3>
             <ul>
-                {filteredTasks.map(task => <TaskCard task={task}/>)}
+                {filteredTasks.map(task => <TaskCard
+                    key={task.id}
+                    task={task}
+                    onStatusChange={onStatusChange}
+                    onTitleChange={onTitleChange}
+                    onDeleteTask={onDeleteTask}
+                    onAddAttempt={onAddAttempt}/>)}
             </ul>
         </div>
     )
