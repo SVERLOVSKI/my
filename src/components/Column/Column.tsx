@@ -2,6 +2,7 @@ import type { Status, Task } from "../../data/seed";
 import TaskCard from "../TaskCard/TaskCard";
 
 interface ColumnProps {
+    searchInput: string
     tasks: Task[]
     columnName: string
     showOnlyIncomplete?: boolean
@@ -13,6 +14,7 @@ interface ColumnProps {
 }
 
 const Column = ({
+    searchInput,
     tasks,
     columnName,
     showOnlyIncomplete,
@@ -30,13 +32,14 @@ const Column = ({
         )
     }
 
-    const filteredTasks = tasks.filter(task => theme === 'all' || task.topic === theme)
+    const filteredTasks = tasks.filter(task => task.title.includes(searchInput))
+    const tasksList = filteredTasks.filter(task => theme === 'all' || task.topic === theme)
 
     return (
         <div>
             <h3>{columnName}</h3>
             <ul>
-                {filteredTasks.map(task => <TaskCard
+                {tasksList.map(task => <TaskCard
                     key={task.id}
                     task={task}
                     onStatusChange={onStatusChange}

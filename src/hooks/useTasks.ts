@@ -1,8 +1,9 @@
-import { useState } from "react"
+import { useState} from "react"
 import { taskItems, type Attempt, type Status } from "../data/seed"
 
 export const useTasks = () => {
-    const [tasks, setTasks] = useState(taskItems)
+    const [tasks, setTasks] = useState(taskItems);
+    const [searchInput, setSearchInput] = useState('')
 
     const openTasks = tasks.filter((task) => task.status === 'backlog')
     const progressTasks = tasks.filter((task) => task.status === 'in-progress')
@@ -56,6 +57,10 @@ export const useTasks = () => {
         )
     }
 
+    const handleSearchInput = (value: string) => {
+        setSearchInput(value)
+    }
+
     return {
         tasks,
         setTasks,
@@ -63,9 +68,11 @@ export const useTasks = () => {
         progressTasks,
         doneTasks,
         themes,
+        searchInput,
         handleStatusChange,
         handleTaskTitleChange,
         handleDeleteTask,
-        handleAddAttempt
+        handleAddAttempt,
+        handleSearchInput
     }
 }

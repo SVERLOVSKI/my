@@ -17,10 +17,12 @@ const TasksList = () => {
         progressTasks,
         doneTasks,
         themes,
+        searchInput,
         handleStatusChange,
         handleTaskTitleChange,
         handleDeleteTask,
-        handleAddAttempt
+        handleAddAttempt,
+        handleSearchInput
     } = useTasks()
 
     return (
@@ -31,12 +33,16 @@ const TasksList = () => {
                     setShowOnlyIncomplete={setShowOnlyIncomplete} 
                     themes={themes}
                     theme={theme}
-                    setTheme={setTheme}/>
+                    setTheme={setTheme}
+                    search={searchInput}
+                    onHandleInput={handleSearchInput}
+                    />
             </div>
             <div className='flex'>
                 <div className='flex'>
                     <div id="open_tasks" className="">
                         <Column
+                            searchInput={searchInput}
                             tasks={openTasks}
                             columnName='Открытые'
                             theme={theme} onStatusChange={handleStatusChange}
@@ -46,6 +52,7 @@ const TasksList = () => {
                     </div>
                     <div id="progress_tasks" className="">
                         <Column
+                            searchInput={searchInput}
                             tasks={progressTasks}
                             columnName='В работе'
                             theme={theme} onStatusChange={handleStatusChange}
@@ -55,6 +62,7 @@ const TasksList = () => {
                     </div>
                     <div id="completed_tasks">
                         <Column
+                            searchInput={searchInput}
                             tasks={doneTasks}
                             showOnlyIncomplete={showOnlyIncomplete}
                             columnName='Выполненные'
