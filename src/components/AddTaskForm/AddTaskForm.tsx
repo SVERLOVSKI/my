@@ -1,14 +1,11 @@
 import { useState, type ChangeEvent, type SubmitEvent } from "react";
-import type { Difficulty, Task, Topic } from "../../data/seed"
-
-type AddTaskFormProps = {
-    tasks: Task[];
-    setTasks: (value:Task[]) => void
-}
+import type { Difficulty, Topic } from "../../data/seed"
+import { useBoard } from "../../hooks/useBoard";
 
 export type SelectChangeEvent<T extends string> = ChangeEvent<HTMLSelectElement & {value: T}>
 
-const AddTaskForm = ({tasks, setTasks}: AddTaskFormProps) => {
+const AddTaskForm = () => {
+    const { tasks, setTasks } = useBoard()
     const [title, setTitle] = useState('')
     const [topic, setTopic] = useState<Topic>('algorithms')
     const [difficult, setDifficult] = useState<Difficulty>('easy')

@@ -1,28 +1,21 @@
-import type { Status, Task } from "../../data/seed";
+import { useBoard } from "../../hooks/useBoard";
 import TaskCard from "../TaskCard/TaskCard";
+import type { Status } from "../../data/seed";
 
 interface ColumnProps {
-    searchInput: string
-    tasks: Task[]
     columnName: string
     showOnlyIncomplete?: boolean
     theme: string
-    onStatusChange: (taskId: string, newStatus: Status) => void
-    onTitleChange: (taskId: string, newTitle: string) => void
-    onDeleteTask: (taskId: string) => void
-    onAddAttempt: (taskId: string) => void
+    status: Status
 }
 
 const Column = ({
-    searchInput,
-    tasks,
     columnName,
     showOnlyIncomplete,
     theme,
-    onStatusChange,
-    onTitleChange,
-    onDeleteTask,
-    onAddAttempt}: ColumnProps) => {
+    status,
+    }: ColumnProps) => {
+    const {tasks, searchInput} = useBoard()
     
     if (tasks.length === 0 || showOnlyIncomplete) {
         return (
@@ -33,7 +26,7 @@ const Column = ({
     }
 
     const filteredTasks = tasks.filter(task => task.title.includes(searchInput))
-    const tasksList = filteredTasks.filter(task => theme === 'all' || task.topic === theme)
+    const tasksList = filteredTasks.filter(task => task.status === status && theme === 'all' || task.topic === theme)
 
     return (
         <div>
@@ -42,10 +35,7 @@ const Column = ({
                 {tasksList.map(task => <TaskCard
                     key={task.id}
                     task={task}
-                    onStatusChange={onStatusChange}
-                    onTitleChange={onTitleChange}
-                    onDeleteTask={onDeleteTask}
-                    onAddAttempt={onAddAttempt}/>)}
+                />)}
             </ul>
         </div>
     )
