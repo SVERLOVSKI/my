@@ -45,9 +45,9 @@
 - [x] **Choosing the State Structure** — группировать связанное; избегать противоречивых, избыточных и дублирующихся state; **не хранить в state то, что можно вычислить при рендере**; избегать глубокой вложенности (нормализация).
 - [x] **Sharing State Between Components** — подъём состояния (lifting state up), controlled vs uncontrolled компоненты, single source of truth.
 - [x] **Preserving and Resetting State** — state живёт в **позиции** компонента в дереве; сброс через `key`; почему тот же компонент на той же позиции сохраняет state.
-- [ ] **Extracting State Logic into a Reducer** — отдельное упражнение с формой попытки: `useReducer`, экшены описывают «что произошло», а не «что поменять»; сравнить с версией на `useState`.
+- [x] **Extracting State Logic into a Reducer** — отдельное упражнение с формой попытки: `useReducer`, экшены описывают «что произошло», а не «что поменять»; сравнить с версией на `useState`.
 - [x] **Passing Data Deeply with Context** — в основном проекте `BoardProvider` хранит данные в `useState`, Context раздаёт данные и обработчики; `createContext` / `useContext` / `<Context>` как провайдер (React 19); **сначала попробовать композицию и `children`**.
-- [ ] **Scaling Up with Reducer and Context** — в отдельном упражнении передать состояние формы и `dispatch` через разные контексты; основная доска продолжает работать на `useState` и Context.
+- [x] **Scaling Up with Reducer and Context** — в отдельном упражнении передать состояние формы и `dispatch` через разные контексты; основная доска продолжает работать на `useState` и Context.
 
 ## Часть 4. Escape Hatches — выход за пределы React
 
