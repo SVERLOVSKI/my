@@ -1,9 +1,12 @@
-import { useState} from "react"
-import { taskItems, type Attempt, type Status } from "../data/seed"
+import { useState } from "react"
+import { taskItems, type Attempt, type Status, type Task } from "../data/seed"
+
+type NewTask = Pick<Task, 'title' | 'topic' | 'difficulty'>
+type NewAttempt = Omit<Attempt, 'id'>
 
 export const useTasks = () => {
     const [tasks, setTasks] = useState(taskItems);
-    const [searchInput, setSearchInput] = useState('')
+    const [selectedTaskId, setSelectedTaskId] = useState<string | null>(null)
 
     const openTasks = tasks.filter((task) => task.status === 'backlog')
     const progressTasks = tasks.filter((task) => task.status === 'in-progress')
@@ -11,7 +14,21 @@ export const useTasks = () => {
 
     const themes = new Set(tasks.map((task) => task.topic))
 
-    const handleStatusChange = (taskId: string, newStatus: Status) => {
+    const addTask = ({ title, topic, difficulty }: NewTask) => {
+        const task: Task = {
+            id: crypto.randomUUID(),
+            title,
+            topic,
+            difficulty,
+            status: 'backlog',
+            attempts: [],
+            createdAt: new Date().toISOString(),
+        }
+
+        setTasks((previousTasks) => [...previousTasks, task])
+    }
+
+    const moveTask = (taskId: string, newStatus: Status) => {
         setTasks(prevTasks =>
             prevTasks.map(task =>
                 task.id === taskId
@@ -21,7 +38,7 @@ export const useTasks = () => {
         )
     }
     
-    const handleTaskTitleChange = (taskId: string, newTitle: string) => {
+    const renameTask = (taskId: string, newTitle: string) => {
         setTasks(prevTasks =>
             prevTasks.map(task =>
                 task.id === taskId
@@ -31,21 +48,20 @@ export const useTasks = () => {
         )
     }
     
-    const handleDeleteTask = (taskId: string) => {
+    const removeTask = (taskId: string) => {
         setTasks(prevTasks =>
             prevTasks.filter(task =>
                 task.id !== taskId
             )
         )
+
+        setSelectedTaskId((currentTaskId) => currentTaskId === taskId ? null : currentTaskId)
     }
 
-    const handleAddAttempt = (taskId: string) => {
+    const logAttempt = (taskId: string, attempt: NewAttempt) => {
         const newAttempt: Attempt = {
+            ...attempt,
             id: crypto.randomUUID(),
-            date: new Date().toISOString(),
-            minutes: 60,
-            solved: true,
-            note: ''
         }
 
         setTasks(prevTasks =>
@@ -57,22 +73,18 @@ export const useTasks = () => {
         )
     }
 
-    const handleSearchInput = (value: string) => {
-        setSearchInput(value)
-    }
-
     return {
         tasks,
-        setTasks,
+        selectedTaskId,
+        setSelectedTaskId,
         openTasks,
         progressTasks,
         doneTasks,
         themes,
-        searchInput,
-        handleStatusChange,
-        handleTaskTitleChange,
-        handleDeleteTask,
-        handleAddAttempt,
-        handleSearchInput
+        addTask,
+        moveTask,
+        renameTask,
+        removeTask,
+        logAttempt,
     }
 }

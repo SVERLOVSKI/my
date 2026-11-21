@@ -1,5 +1,6 @@
 export type Topic = 'algorithms' | 'react' | 'typescript' | 'css'
 export type Difficulty = 'easy' | 'medium' | 'hard'
+export type DifficultyFilter = Difficulty | 'all'
 export type Status = 'backlog' | 'in-progress' | 'done'
 
 export type Attempt = {

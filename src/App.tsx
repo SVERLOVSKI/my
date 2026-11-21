@@ -1,14 +1,15 @@
-import Header from './components/Header/Header'
-import TasksList from './components/TasksList/TasksList'
+import Board from './components/Board/Board'
+import { BoardProvider } from './context/BoardProvider'
+import { ThemeProvider } from './context/ThemeProvider'
 import './App.css'
 
 function App() {
-
   return (
-    <>
-      <Header />
-      <TasksList />
-    </>
+    <ThemeProvider>
+      <BoardProvider>
+        <Board />
+      </BoardProvider>
+    </ThemeProvider>
   )
 }
 

@@ -5,7 +5,7 @@ import { useBoard } from "../../hooks/useBoard";
 export type SelectChangeEvent<T extends string> = ChangeEvent<HTMLSelectElement & {value: T}>
 
 const AddTaskForm = () => {
-    const { tasks, setTasks } = useBoard()
+    const { addTask } = useBoard()
     const [title, setTitle] = useState('')
     const [topic, setTopic] = useState<Topic>('algorithms')
     const [difficult, setDifficult] = useState<Difficulty>('easy')
@@ -20,24 +20,14 @@ const AddTaskForm = () => {
         setDifficult(e.target.value)
     }
     
-    const handeAddTask = (e: SubmitEvent<HTMLFormElement>) => {
-        setTasks([
-            ...tasks,
-            {
-                id: title,
-                title: title,
-                topic: topic,
-                difficulty: difficult,
-                status: 'backlog',
-                attempts: [],
-                createdAt: String(new Date()),
-            }
-        ]);
+    const handleAddTask = (e: SubmitEvent<HTMLFormElement>) => {
         e.preventDefault()
+
+        addTask({ title, topic, difficulty: difficult })
     }
 
     return (
-        <form onSubmit={handeAddTask} action="" className="flex flex-col">
+        <form onSubmit={handleAddTask} action="" className="flex flex-col">
             <h3 className="">Добавление задачи</h3>
             
             <label htmlFor="task-title">Название задачи</label>

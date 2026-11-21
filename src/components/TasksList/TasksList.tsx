@@ -3,21 +3,26 @@ import { useState } from 'react'
 import Column from '../Column/Column'
 import FilterBlock from '../Filters/FiltersBlock'
 import AddTaskForm from '../AddTaskForm/AddTaskForm'
-import { BoardProvider } from '../../context/BoardProvider'
+import type { DifficultyFilter } from '../../data/seed'
 
 const TasksList = () => {
     const [showOnlyIncomplete, setShowOnlyIncomplete] = useState(false)
     const [theme, setTheme] = useState('all')
+    const [difficulty, setDifficulty] = useState<DifficultyFilter>('all')
+    const [searchInput, setSearchInput] = useState('')
 
     return (
         <>
-        <BoardProvider>
             <div>
                 <FilterBlock 
                     showOnlyIncomplete={showOnlyIncomplete}
                     setShowOnlyIncomplete={setShowOnlyIncomplete} 
                     theme={theme}
                     setTheme={setTheme}
+                    difficulty={difficulty}
+                    setDifficulty={setDifficulty}
+                    searchInput={searchInput}
+                    setSearchInput={setSearchInput}
                     />
             </div>
             <div className='flex'>
@@ -26,6 +31,8 @@ const TasksList = () => {
                         <Column
                             columnName='Открытые'
                             theme={theme}
+                            difficulty={difficulty}
+                            searchInput={searchInput}
                             status='backlog'
                             />
                     </div>
@@ -33,6 +40,8 @@ const TasksList = () => {
                         <Column
                             columnName='В работе'
                             theme={theme}
+                            difficulty={difficulty}
+                            searchInput={searchInput}
                             status='in-progress'
                             />
                     </div>
@@ -41,6 +50,8 @@ const TasksList = () => {
                             showOnlyIncomplete={showOnlyIncomplete}
                             columnName='Выполненные'
                             theme={theme}
+                            difficulty={difficulty}
+                            searchInput={searchInput}
                             status='done'
                             />
                     </div>
@@ -49,7 +60,6 @@ const TasksList = () => {
                     <AddTaskForm/>
                 </div>
             </div>
-        </BoardProvider>
         </>
     )
 }
